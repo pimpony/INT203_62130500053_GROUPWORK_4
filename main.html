@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Basic Vue Js - HelloWorld App</title>
+
+  <!-- https://google.github.io/material-design-icons/#icon-font-for-the-web -->
+  <!-- Using via Google Web Fonts -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
+  <!-- https://tailwindcss.com/docs/installation -->
+  <!-- Using Tailwind via CDN -->
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
+
+  <!-- https://v3.vuejs.org/guide/installation.html#release-notes -->
+  <!-- Vue CDN -->
+  <script src="https://unpkg.com/vue@next"></script>
+  <link href="style.css" rel="stylesheet">
+</head>
+
+<body class=" bg-pink-200">
+  <div class="flex justify-center items-center my-28">
+    <div id="app" class=" h-full  w-screen bg-pink-200 flex justify-center items-center ">
+      <div class="h-auto w-2/6 shadow shadow-lg bg-white items-center mx-auto rounded-xl p-5 text-gray-700">
+        <p class=" flex justify-center items-center  font-semibold text-xl ">Cat Gallery | LIKE : {{ countLike}}</p>
+
+        <!-- Search -->
+        <div class="flex items-center justify-end h-10 mt-5 flex relative">
+          <span v-if="show.icon" @click="toggle" class="material-icons text-3xl text-pink-400  ">
+            search
+          </span>
+          <div v-if="show.searchbar">
+            <input v-model="input"
+              class="mr-2 p-1 w-72 placeholder-gray-500 placeholder-opacity-50 focus:outline-none text-black  border-2 border-pink-300 rounded-sm "
+              type="text" placeholder="Please enter text for searching photos">
+            <button class="ml-2 p-1 rounded-sm focus:outline-none font-san border-2 border-pink-300 rounded-md"
+              @click="toggle">Cancel</button>
+          </div>
+        </div>
+
+        <!-- selectImage-->
+        <div>
+          <div v-if="select_image" class="flex    " id="image-box">
+            <div v-for="(photo, index) in searchSelectPhoto" class="flex justify-center item-center">
+              <img :src="photo.src" id="imgshow">
+            </div>
+
+
+            <button class="flex "><span @click="closePhoto" v-if="select_image == true"
+                class="material-icons  bg-pink close-icon text-white">
+                close
+              </span>
+            </button>
+          </div>
+        </div>
+
+
+
+
+        <!-- Main content -->
+        <div v-if="searchphotos.length !== 0" class="mt-5 ">
+          <div v-for="(photo, index) in searchphotos" class="flex flex-col items-center w-full mt-5">
+            <div class="w-full text-gray-700 font-san flex  w-48 flex justify-between item-center">
+              <img :src="photo.src" class=" w-5/12 rounded-sm" :alt="photo.title" v-on:click="zoomPhoto(index)">
+              <button
+                class="bg-pink-400 text-white  items-center font-semibold px-3 my-auto mx-3  rounded-md focus:outline-none"
+                v-on:click="favorite(index)">
+                LIKE
+                <span class="material-icons text-white text-xl ml-1" v-if="photo.like > 0">favorite</span>
+                </p>
+              </button>
+              <div class=" w-64">
+                <p class="text-lg  text-pink-400 flex justify-center item-center">{{ photo.title }}</p>
+                <p class="text-lg ">{{ photo.detail }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div v-else class="mt-5 flex justify-center item-center">
+          <p>Not have any Photo</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- my main.js -->
+  <script src="./main.js"></script>
+</body>
+
+</html>
