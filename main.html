@@ -43,8 +43,8 @@
         <!-- selectImage-->
         <div>
           <div v-if="select_image" class="flex    " id="image-box">
-            <div v-for="(photo, index) in searchSelectPhoto" class="flex justify-center item-center">
-              <img :src="photo.src" id="imgshow">
+            <div v-for="(garelly, index) in searchSelectPhoto" class="flex justify-center item-center">
+              <img :src="garelly.src" id="imgshow">
             </div>
 
 
@@ -61,19 +61,19 @@
 
         <!-- Main content -->
         <div v-if="searchphotos.length !== 0" class="mt-5 ">
-          <div v-for="(photo, index) in searchphotos" class="flex flex-col items-center w-full mt-5">
+          <div v-for="(garelly, index) in searchphotos" class="flex flex-col items-center w-full mt-5">
             <div class="w-full text-gray-700 font-san flex  w-48 flex justify-between item-center">
-              <img :src="photo.src" class=" w-5/12 rounded-sm" :alt="photo.title" v-on:click="zoomPhoto(index)">
+              <img :src="garelly.src" class=" w-5/12 rounded-sm" :alt="garelly.title" v-on:click="zoomPhoto(index)">
               <button
                 class="bg-pink-400 text-white  items-center font-semibold px-3 my-auto mx-3  rounded-md focus:outline-none"
                 v-on:click="favorite(index)">
                 LIKE
-                <span class="material-icons text-white text-xl ml-1" v-if="photo.like > 0">favorite</span>
+                <span class="material-icons text-white text-xl ml-1" v-if="garelly.like > 0">favorite</span>
                 </p>
               </button>
               <div class=" w-64">
-                <p class="text-lg  text-pink-400 flex justify-center item-center">{{ photo.title }}</p>
-                <p class="text-lg ">{{ photo.detail }}</p>
+                <p class="text-lg  text-pink-400 flex justify-center item-center">{{ garelly.title }}</p>
+                <p class="text-lg ">{{ garelly.detail }}</p>
               </div>
             </div>
           </div>
